@@ -12,33 +12,39 @@ import { routes } from './routes';
 
 export const Navigation = () => {
   return (
-    <Suspense fallback={<span>Loading...</span>}>
+    <Suspense fallback={ <span>Loading...</span> }>
       <Router>
         <div className="main-layout">
           <nav>
               <img src={ logo } alt="React Logo" />
             <ul>
               {
-                routes.map(({path, name})=>(
-                  <li key={path}>
-                    <NavLink key={path} to={path} activeClassName="nav-active" >{name}</NavLink>
+                routes.map( ({ path, name }) => (
+                  <li key={ path }>
+                    <NavLink 
+                      to={ path }
+                      activeClassName="nav-active">
+                        { name }
+                      </NavLink>
                   </li>
-                )) 
+                ))
               }
             </ul>
           </nav>
 
           <Switch>
               {
-                routes.map(({path, component:Component})=>(
+                routes.map( ({ path, component:Component }) => (
                   <Route 
-                    key={path} 
-                    path={path}
-                    render={() => <Component />}
+                    key={ path }
+                    path={ path }
+                    render={ () => <Component /> }
                   />
                 ))
               }
-              <Redirect to={routes[0].path} />
+
+              <Redirect to={ routes[0].path } />
+          
           </Switch>
         </div>
       </Router>
